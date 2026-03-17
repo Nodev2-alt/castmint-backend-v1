@@ -46,11 +46,9 @@ app.get("/fee", async (req, res) => {
 app.get("/upload-url", async (req, res) => {
   try {
     const signedUrl = await pinata.upload.public.createSignedURL({
-      expiresIn: 600,
-      maxSize: 50 * 1024 * 1024,
-      mimeTypes: ["image/*"],
+      expires: 600,
     });
-    res.json(signedUrl);
+    res.json({ url: signedUrl });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
